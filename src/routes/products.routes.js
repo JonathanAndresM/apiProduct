@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-
+const productController = require('../controllers/product.controller');
 let products = [];
-
+router.get('/', productController.getAllProducts);
 router.get('/', (req, res) => {
   res.json(products);
 });
@@ -14,7 +14,6 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
-
 
 
 // name

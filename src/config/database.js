@@ -1,0 +1,1 @@
+//Conexión a base de datos y variables globales
