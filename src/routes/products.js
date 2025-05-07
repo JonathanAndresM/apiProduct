@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+import { Router } from 'express';
+const router = Router();
 
 let products = [];
 
@@ -13,23 +13,4 @@ router.post('/', (req, res) => {
   res.status(201).json(product);
 });
 
-module.exports = router;
-
-
-
-// name
-// price
-// description
-// category
-// stock
-// saleDate {unitSold, revenue}
-
-// base de datos
-// - MongoDB
-
-// frontend queda como esta
-// backend queda separado del frontend
-// - nodejs
-// - express
-// - mongodb
-// - mongoose
+export default router;
