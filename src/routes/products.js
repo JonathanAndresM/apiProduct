@@ -1,5 +1,27 @@
 import { Router } from 'express';
+import productsController from '../controllers/products.controller.js'
+
 const router = Router();
+
+// Traer a todos los productos
+router.get('/', productsController.getAllProducts);
+
+// Traer producto por id
+router.get('/:id', productsController.getProductById);
+
+// Crear producto
+router.post('/', productsController.createProduct);
+
+// Actulizar un producto por medio de ID
+router.put('/:id', productsController.updateProduct);
+
+// Implementar soft delete
+router.delete('/:id', productsController.deleteProduct);
+
+
+
+
+
 
 let products = [];
 
