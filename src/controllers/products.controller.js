@@ -1,3 +1,5 @@
+import { Product } from "../sequelize_models/product_model.js"; // Importar el modelo de producto
+import sequelize from "../db/sequelize_conn.js"; // Importar la conexión a la base de datos
 // Importar los modelos de producto y precio desde models
 // Importar sequelize
 // import { sequelize } from '../db/sequelize_conn'
@@ -6,10 +8,11 @@ class ProductsController {
 
     async getAllProducts(req, res) {
         try {
-            res.status(200).json({ msg: 'Listado de todos los productos' })
+            const products = await Product.findAll(); // Trae todos los productos de la tabla
+            res.status(200).json(products);
         } catch (error) {
-            console.error('Error al obtener los productos:', error);
-            res.status(500).json({ error: 'Error interno del servidor' })
+            console.error('Error al obtener los productos:', error.message);
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
 
@@ -17,9 +20,15 @@ class ProductsController {
         try {
             const { product_id } = req.params
 
-            res.status(200).json({ msg: `Detalle del producto con ID: ${product_id}` })
+            const product = await Product.findByPk(product_id); // Busca el producto por ID
+            if (!product) {
+                return res.status(404).json({ error: 'Producto no encontrado' });
+            }
+
+            res.status(200).json(product); // Devuelve el producto encontrado
+
         } catch (error) {
-            console.error('Error al obtener el producto por ID:', error);
+            console.error('Error al obtener el producto por ID:', error.message);
             res.status(500).json({ error: 'Error interno del servidor' });
         }
     }
