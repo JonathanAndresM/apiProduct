@@ -1,5 +1,6 @@
-import { sequelize } from '../sequelize_conn'
+import { sequelize } from '../db/sequelize_conn'
 import { DataTypes } from 'sequelize';
+import Product_price from './product_price';
 
 const Product = sequelize.define(
 	'Product',
@@ -22,3 +23,7 @@ const Product = sequelize.define(
 		}
 	}
 );
+
+Product.hasMany(Product_price, { foreignKey: 'product_id' });
+
+export default Product;

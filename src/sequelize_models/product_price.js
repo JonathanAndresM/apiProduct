@@ -1,5 +1,6 @@
-import { sequelize } from '../sequelize_conn'
+import { sequelize } from '../db/sequelize_conn'
 import { DataTypes } from 'sequelize';
+import Product from './product_model';
 
 const Product_price = sequelize.define(
 	'Product_price',
@@ -7,8 +8,7 @@ const Product_price = sequelize.define(
 		product_id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-			primaryKey: true,
-
+			primaryKey: true
 		},
 		product_price: {
 			type: DataTypes.FLOAT,
@@ -17,3 +17,7 @@ const Product_price = sequelize.define(
 		}
 	}
 );
+
+Product_price.belongsTo(Product, { foreignKey: 'product_id' });
+
+export default Product_price;
