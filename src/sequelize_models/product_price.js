@@ -1,6 +1,5 @@
-import { sequelize } from '../db/sequelize_conn'
-import { DataTypes } from 'sequelize';
-import Product from './product_model';
+import sequelize from '../db/sequelize_conn.js'; // Importar la conexión a la base de datos
+import { DataTypes } from '@sequelize/core';
 
 const Product_price = sequelize.define(
 	'Product_price',
@@ -17,7 +16,5 @@ const Product_price = sequelize.define(
 		}
 	}
 );
-
-Product_price.belongsTo(Product, { foreignKey: 'product_id' });
 
 export default Product_price;
