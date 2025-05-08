@@ -2,9 +2,11 @@ import { Sequelize } from '@sequelize/core';
 import { MySqlDialect } from '@sequelize/mysql';
 import normalizePort from 'normalize-port';
 
+process.loadEnvFile();
+
 const enviroment = process.env
 
-const PORT = normalizePort(enviroment.PORT || 3306)
+const PORT = normalizePort(enviroment.DB_PORT || 4000)
 
 const sequelize = new Sequelize({
 	dialect: MySqlDialect,
