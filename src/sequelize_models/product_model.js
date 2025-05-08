@@ -1,7 +1,7 @@
-import { sequelize } from '../sequelize_conn'
-import { DataTypes } from 'sequelize';
+import sequelize from '../sequelize_conn.js'; // Importar la conexión a la base de datos
+import { DataTypes } from '@sequelize/core';
 
-const Product = sequelize.define(
+export const Product = sequelize.define(
 	'Product',
 	{
 		product_id: {
