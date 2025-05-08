@@ -1,5 +1,9 @@
 import { Product } from "../sequelize_models/product_model.js"; // Importar el modelo de producto
 import sequelize from "../sequelize_conn.js"; // Importar la conexión a la base de datos
+// Importar los modelos de producto y precio desde models
+// Importar sequelize
+// import { sequelize } from '../db/sequelize_conn'
+
 class ProductsController {
 
     async getAllProducts(req, res) {
