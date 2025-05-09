@@ -1,5 +1,10 @@
 # Documentación de la API REST
 
+## Requisitos Previos
+
+- **Node.js**: Versión 20.19.0
+- **MySQL**: Versión 8.0
+
 ## Descripción
 Esta es una API REST diseñada para gestionar productos. Utiliza Node.js con Express como framework principal y Sequelize como ORM para la base de datos.
 
@@ -55,6 +60,7 @@ tests/
 #### Carpeta `tests`
 - **products.test.js**: Contiene pruebas unitarias para los endpoints relacionados con productos.
 
+
 ## Instalación
 
 1. Clona este repositorio.
@@ -62,11 +68,44 @@ tests/
 3. Configura las variables de entorno necesarias.
 4. Inicia la aplicación con `npm start`.
 
+## Pasos para Levantar el Proyecto
+
+1. **Crear la Base de Datos**:
+   - Asegúrate de tener MySQL instalado y en ejecución.
+   - Crea una base de datos para el proyecto utilizando el siguiente comando en MySQL:
+     ```sql
+     CREATE DATABASE nombre_de_tu_base_de_datos;
+     ```
+
+2. **Configurar el Archivo `.env`**:
+   - Crea un archivo `.env` en la raíz del proyecto.
+   - Añade las siguientes variables de entorno, reemplazando los valores según tu configuración:
+     ```env
+     DB_HOST=localhost
+     DB_USER=tu_usuario
+     DB_PASSWORD=tu_contraseña
+     DB_NAME=nombre_de_tu_base_de_datos
+     DB_PORT=3306
+     PORT=3000
+     ```
+
+3. **Instalar Dependencias**:
+   - Ejecuta el siguiente comando para instalar las dependencias del proyecto:
+     ```bash
+     npm install
+     ```
+
+4. **Levantar el Proyecto**:
+   - Inicia el servidor en modo desarrollo con el siguiente comando:
+     ```bash
+     npm run dev
+     ```
+
 ## Uso
 
 La API expone endpoints para gestionar productos. Puedes consultar la documentación de los endpoints en el archivo `products.route.js` o utilizando herramientas como Postman o Swagger.
 
 ## Contribuciones
 
-Si deseas contribuir, por favor abre un issue o envía un pull request. Asegúrate de seguir las guías de estilo y de incluir pruebas para tus cambios.
+Si deseas contribuir, por favor abre un issue o envía un pull request a la rama dev través de un fork. Asegúrate de seguir las guías de estilo y de incluir pruebas para tus cambios.
 
