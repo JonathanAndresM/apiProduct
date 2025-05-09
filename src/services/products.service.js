@@ -1,10 +1,10 @@
-import { Product } from "../sequelize_models/product_model.js";
+import { Product } from "../models/product.model.js";
 
 class ProductsService {
   async getAllProducts() {
     try {
       // Filtramos productos eliminados, solo traemos los no eliminados
-      const products = await Product.findAll({ where: { is_deleted: false } });
+      const products = await Product.findAll();
       return products;
     } catch (error) {
       console.error("Error al obtener los productos:", error);
@@ -16,7 +16,7 @@ class ProductsService {
     try {
       // Filtramos también por is_deleted para no devolver productos eliminados
       const product = await Product.findOne({
-        where: { product_id: id, is_deleted: false },
+        where: { id },
       });
       return product;
     } catch (error) {
@@ -52,8 +52,8 @@ class ProductsService {
       const product = await Product.findByPk(id);
       if (!product) return null;
 
-      // Soft delete: actualiza el campo is_deleted a true
-      await product.update({ is_deleted: true });
+      await product.destroy();
+
       return product;
     } catch (error) {
       console.error("Error al eliminar producto:", error);

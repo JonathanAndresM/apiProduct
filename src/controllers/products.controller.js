@@ -1,10 +1,4 @@
-import { Product } from "../sequelize_models/product_model.js"; // Importar el modelo de producto
-import sequelize from "../db/sequelize_conn.js"; // Importar la conexión a la base de datos
-import ProductsService from "../services/products.services.js";
-
-// Importar los modelos de producto y precio desde models
-// Importar sequelize
-// import { sequelize } from '../db/sequelize_conn'
+import ProductsService from "../services/products.service.js";
 
 class ProductsController {
   async getAllProducts(req, res) {
@@ -19,8 +13,8 @@ class ProductsController {
 
   async getProductById(req, res) {
     try {
-      const { product_id } = req.params;
-      const product = await ProductsService.getProductById(product_id); // Llamar al servicio
+      const { id } = req.params;
+      const product = await ProductsService.getProductById(id); // Llamar al servicio
       if (!product) {
         return res.status(404).json({ error: "Producto no encontrado" });
       }
@@ -44,8 +38,8 @@ class ProductsController {
 
   async updateProduct(req, res) {
     try {
-      const { product_id } = req.params;
-      const updated = await ProductService.updateProduct(product_id, req.body);
+      const { id } = req.params;
+      const updated = await ProductsService.updateProduct(id, req.body);
       if (!updated)
         return res.status(404).json({ error: "Producto no encontrado" });
       res.status(200).json(updated);
@@ -57,8 +51,8 @@ class ProductsController {
 
   async deleteProduct(req, res) {
     try {
-      const { product_id } = req.params;
-      const deleted = await ProductService.deleteProduct(product_id);
+      const { id } = req.params;
+      const deleted = await ProductsService.deleteProduct(id);
       if (!deleted)
         return res.status(404).json({ error: "Producto no encontrado" });
       res.status(200).json({ msg: "Producto eliminado exitosamente" });
