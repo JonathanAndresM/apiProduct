@@ -33,17 +33,9 @@ class ProductsController {
 
   // Se crea un nuevo producto
   async createProduct(req, res) {
-    const validatedData = productSchema.safeParse(req.body);
-
-    if (!validatedData.success) {
-      return res.status(400).json({
-        error: "Datos inválidos",
-        issues: validatedData.error.errors.map(e => ({ path: e.path, message: e.message }))
-      });
-    }
-
+    
     try {
-      const newProduct = await ProductsService.createProduct(validatedData.data);
+      const newProduct = await ProductsService.createProduct(req.validatedData);
       res.status(201).json(newProduct);
     } catch (error) {
       console.error("Error al crear el producto:", error.message);
@@ -53,18 +45,10 @@ class ProductsController {
 
   // Se actualiza un producto
   async updateProduct(req, res) {
-    const result = productUpdateSchema.safeParse(req.body);
-
-    if (!result.success) {
-      return res.status(400).json({
-        error: "Datos inválidos",
-        issues: result.error.errors.map(e => ({ path: e.path, message: e.message }))
-      });
-    }
-
+    
     try {
       const { id } = req.params;
-      const updated = await ProductsService.updateProduct(id, result.data);
+      const updated = await ProductsService.updateProduct(id, req.validatedData);
       if (!updated) return res.status(404).json({ error: "Producto no encontrado" });
       res.status(200).json(updated);
     } catch (error) {
